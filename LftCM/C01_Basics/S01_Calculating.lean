@@ -137,6 +137,12 @@ section
 
 end
 
+/-
+  calc: The calc block shows each step explicitly,
+  which can make the proof more readable.
+  calc Mode: Allows you to chain equalities in a clear and structured way.
+-/
+
 section
   variable (a b : ℝ)
 
@@ -178,8 +184,16 @@ section
       _ = a * c + a * d + b * c + b * d := by
         rw [←add_assoc, add_assoc (a * c), add_comm (b * c), ←add_assoc]
 
-  example (a b : ℝ) : (a + b) * (a - b) = a ^ 2 - b ^ 2 := by
-    sorry
+  example (a b : ℝ) : (a + b) * (a - b) = a ^ 2 - b ^ 2 :=
+    calc
+      (a + b) * (a - b) = (a + b) * a - (a + b) * b := by
+        rw [mul_sub]
+      _ = a * a + a * b - a * b - b * b := by
+        rw [add_mul, add_mul, ←sub_sub, mul_comm a b]
+      _ = a * a - b * b := by
+        rw [add_sub_cancel]
+      _ = a ^ 2 - b ^ 2 := by
+        rw [pow_two, pow_two]
 
   #check pow_two a
   #check mul_sub a b c
