@@ -24,6 +24,7 @@ def yourFavouriteNumber : ℕ := sorry
 -- sorry works as a placeholder
 
 #check myFavouriteNumber
+#check yourFavouriteNumber
 
 -- or not give them a name
 example : ℕ := 2
@@ -41,15 +42,20 @@ example : ℕ := 2
 #check Irrational (rexp 1 + π)
 #check myFavouriteNumber = yourFavouriteNumber
 
-def MyDifficultProposition : Prop := ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2)
-def MyEasyProposition : Prop := ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2) ∧ Prime (p + 4)
-def MyVeryEasyProposition : Prop := ∀ n : ℕ, ∃ p, n ≤ p
+def MyDifficultProposition : Prop :=
+  ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2)
+def MyEasyProposition : Prop :=
+  ∀ n : ℕ, ∃ p, n ≤ p ∧ Prime p ∧ Prime (p + 2) ∧ Prime (p + 4)
+def MyVeryEasyProposition : Prop :=
+  ∀ n : ℕ, ∃ p, n ≤ p
 
 -- Key! If `p : Prop`, an expression of type `p` is a proof of `p`.
 
 example : 2 + 2 = 4 := rfl
 example : 2 + 2 ≠ 5 := by simp
-example : ∀ n : ℕ, 2 ≤ n → ∃ x y z : ℕ, 4 * x * y * z = n * (x * y + x * z + y * z) := sorry
+example : ∀ n : ℕ, 2 ≤ n →
+  ∃ x y z : ℕ, 4 * x * y * z = n * (x * y + x * z + y * z) :=
+  sorry
 -- Erdős-Strauss conjecture
 
 example (n : ℕ) (hn : 2 ≤ n) :
@@ -64,6 +70,7 @@ example (a b : ℕ) : a + b = b + a := Nat.add_comm a b
 
 example (a b : ℕ) : a * b = b * a := Nat.mul_comm a b
 
+#print MyVeryEasyProposition
 theorem my_proof : MyVeryEasyProposition := fun n => ⟨n, le_rfl⟩
 
 #check MyVeryEasyProposition
@@ -80,9 +87,13 @@ example (a b : ℕ) : a + a * b = (b + 1) * a :=
 
 -- Very clever tactics
 example (a b : ℕ) : a + a * b = (b + 1) * a := by ring
+example (a b : ℕ) : a + a * b = (b + 1) * a := by show_term ring
 
 example : 2 + 2 ≠ 5 := by simp
+example : 2 + 2 ≠ 5 := by show_term simp
+
 example : 4 ^ 25 < 3 ^ 39 := by norm_num
+example : 4 ^ 25 < 3 ^ 39 := by show_term norm_num
 
 open Nat
 
@@ -95,6 +106,9 @@ example : 3 = 3 := by rfl
 -- In practice we write tactic proofs, and write them with help of the infoview
 example (a b : ℕ) : a + a * b = (b + 1) * a := by
   rw [add_mul b 1 a, one_mul a, add_comm a (a * b), mul_comm a b]
+
+  --> rw [add_mul, one_mul, add_comm, mul_comm]
+  -->
   --> S01_Calculating.lean has many examples and some more information about using `rw`
 
 theorem Euclid_Thm (n : ℕ) : ∃ p, n ≤ p ∧ Nat.Prime p := by

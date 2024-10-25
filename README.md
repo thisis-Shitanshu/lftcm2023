@@ -1,13 +1,19 @@
-Lean for the Curious Mathematician 2023
+Lean for the Curious Mathematician 2023 (Solved!)
 =======================================
 Düsseldorf, 4-8 Sep. 2023
+
+Updated, Oct. 2024
 
 This repository contains the exercises for the LftCM2023 workshop. It is based on
 [Mathematics in Lean](https://leanprover-community.github.io/mathematics_in_lean/).
 (see also its [Github Repo](https://github.com/leanprover-community/mathematics_in_lean))
 
-The workshops website: [LftCM2023 website](https://lftcm2023.github.io/)
+The workshop's website: [LftCM2023 website](https://lftcm2023.github.io/)
 
+## YouTube Playlist
+
+![YouTube Playlist Thumbnail](images/playlist_thumbnail.png)
+[Click here](https://www.youtube.com/playlist?list=PLlF-CfQhukNn7xEbfL38eLgkveyk9_myQ).
 
 ## To use this repository on your computer
 
