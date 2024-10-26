@@ -134,11 +134,17 @@ example : Euclid_Thm = Ugly_Euclid_Thm := rfl
   --> S02_Overview.lean has more examples of tactic proofs
 
 -- Some tactics can self-replace
-theorem Easy_Euclid_Thm (n : ℕ) : ∃ p, n ≤ p ∧ Nat.Prime p := by exact?
+-- 1. exact?
+theorem Easy_Euclid_Thm (n : ℕ) : ∃ p, n ≤ p ∧ Nat.Prime p := by exact Euclid_Thm n
 
+-- 2. rw? in each step
 example (a b : ℕ) : a + a * b = (b + 1) * a := by
-  rw?
-  sorry
+  rw [Nat.add_mul]
+  rw [Nat.one_mul]
+  rw [Nat.add_comm]
+  rw [Nat.mul_comm]
+
+-- 3. simp?
 
 -- # Some more difficult proofs
 def myFactorial : ℕ → ℕ
