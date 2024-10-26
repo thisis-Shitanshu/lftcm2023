@@ -207,14 +207,18 @@ theorem campos_griffiths_morris_sahasrabudhe :
 -- A proof has type given by what it's proved!
 
 -- Useful tactics:
-  -- rw
-  -- exact
-  -- apply
-  -- simp
-  -- induction
+  -- rw: Rewrites expressions in your goal or hypotheses using specified equalities or equivalences.
+  -- exact: Concludes the proof by providing a term that exactly matches the current goal.
+  -- apply: Uses a theorem or lemma to transform the goal by matching it with the theorem's conclusion.
+  -- simp: Simplifies expressions automatically using known simplification rules and lemmas.
+  -- induction: Performs mathematical induction on a variable to split the proof into base and inductive cases.
 
-  -- ring, norm_num, positivity, linarith
-  -- refine
+-- Adv
+  -- ring: Automatically solves equations involving addition and multiplication in rings.
+  -- norm_num: Evaluates and proves numerical expressions involving arithmetic operations.
+  -- positivity: Proves that certain numerical expressions are positive or non-negative.
+  -- linarith: Solves goals involving linear inequalities and equalities using linear arithmetic.
+  -- refine: Constructs a proof by providing a partial term with placeholders to be filled in later.
 
 -- More examples in S03, S04, S05, S06
 --  curly braces
