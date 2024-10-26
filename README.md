@@ -1,4 +1,4 @@
-Lean for the Curious Mathematician 2023 (Solved!)
+Lean for the Curious Mathematician 2023 (Sols in progress ⏳!)
 =======================================
 Düsseldorf, 4-8 Sep. 2023
 

@@ -205,6 +205,12 @@ section
 end
 
 -- Examples.
+/-
+  We're trying to prove that c = ... given the hypotheses c = ... and b = ...
+  We achieve this by substituting b into the equation,
+  rewriting terms using commutative and associative properties,
+  and simplifying the result.
+-/
 
 section
   variable (a b c d : ℝ)
@@ -219,17 +225,46 @@ section
       exact hyp                 -- Conclude the proof
 
   example : c * b * a = b * (a * c) := by
-    ring
+    rw [mul_comm c b, mul_assoc, mul_comm c a]
 
-  example : (a + b) * (a + b) = a * a + 2 * (a * b) + b * b := by
-    ring
+  example : (a + b) * (a + b) = a * a + 2 * (a * b) + b * b :=
+    calc
+      (a + b) * (a + b) = (a + b) * a + (a + b) * b := by
+        rw [mul_add]
+      _ = a * a + b * a + (a * b + b * b) := by
+        rw [add_mul, add_mul]
+      _ = a * a + 2 * (a * b) + b * b := by
+        rw [←add_assoc, mul_comm b a, add_assoc (a * a), ← two_mul]
 
-  example : (a + b) * (a - b) = a ^ 2 - b ^ 2 := by
-    ring
+  example : (a + b) * (a - b) = a ^ 2 - b ^ 2 :=
+    calc
+      (a + b) * (a - b) = (a + b) * a - (a + b) * b := by
+        rw [mul_sub]
+      _ = a * a + b * a - ( a * b + b * b) := by
+        rw [add_mul, add_mul]
+      _ = a * a + a * b - a * b - b * b := by
+        rw [←sub_sub, mul_comm b a]
+      _ = a ^ 2 - b ^ 2 := by
+        rw [add_sub_cancel, pow_two, pow_two]
 
-  example (hyp : c = d * a + b) (hyp' : b = a * d) : c = 2 * a * d := by
-    rw [hyp, hyp']
-    ring
+/-
+  example
+    (a b c d : ℝ) (hyp : c = d * a + b) (hyp' : b = a * d) :
+    c = 2 * a * d := by
+      rw [hyp'] at hyp          -- Substitute b = a * d into hyp
+      rw [mul_comm d a] at hyp  -- Rewrite d * a as a * d in hyp
+      rw [← two_mul (a * d)] at hyp  -- Combine like terms: a * d + a * d = 2 * (a * d)
+      rw [← mul_assoc 2 a d] at hyp  -- Rearrange: 2 * (a * d) = (2 * a) * d
+      exact hyp                 -- Conclude the proof
+-/
+
+  example (hyp : c = d * a + b) (hyp' : b = a * d) :
+  c = 2 * a * d := by
+    rw [hyp'] at hyp
+    rw [mul_comm d a] at hyp
+    rw [← two_mul] at hyp
+    rw [← mul_assoc 2 a d] at hyp
+    exact hyp
 
 end
 
